@@ -19,6 +19,7 @@ export default function Home() {
             <br />
             <span className="text-primary-600">Hkaya.ai</span>
           </motion.h1>
+          
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -31,12 +32,13 @@ export default function Home() {
               قم بإنشاء قصص مخصصة للأطفال تعلم القيم والأخلاق
             </span>
           </motion.p>
+          
           <Link href="/app">
             <motion.button
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="btn-primary text-lg"
+              className="btn-primary text-lg mx-auto"
             >
               Start Creating a Story
             </motion.button>
@@ -49,33 +51,31 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <h2 className="section-title">How It Works</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-            <div className="card text-center">
-              <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <FaBook className="w-8 h-8 text-primary-600" />
+            {[
+              {
+                icon: <FaBook className="w-8 h-8 text-primary-600" />,
+                title: "Input",
+                desc: "Choose a topic or value you want to teach"
+              },
+              {
+                icon: <FaMagic className="w-8 h-8 text-primary-600" />,
+                title: "Generate",
+                desc: "AI creates a personalized story for your child"
+              },
+              {
+                icon: <FaShare className="w-8 h-8 text-primary-600" />,
+                title: "Share",
+                desc: "Read and share the story with your family"
+              }
+            ].map((item, index) => (
+              <div key={index} className="story-card text-center p-6">
+                <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  {item.icon}
+                </div>
+                <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                <p className="text-gray-600">{item.desc}</p>
               </div>
-              <h3 className="text-xl font-bold mb-2">Input</h3>
-              <p className="text-gray-600">
-                Choose a topic or value you want to teach
-              </p>
-            </div>
-            <div className="card text-center">
-              <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <FaMagic className="w-8 h-8 text-primary-600" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Generate</h3>
-              <p className="text-gray-600">
-                AI creates a personalized story for your child
-              </p>
-            </div>
-            <div className="card text-center">
-              <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <FaShare className="w-8 h-8 text-primary-600" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Share</h3>
-              <p className="text-gray-600">
-                Read and share the story with your family
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -84,7 +84,7 @@ export default function Home() {
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="section-title">Sample Story</h2>
-          <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-8">
+          <div className="story-card max-w-3xl mx-auto p-8">
             <div className="prose prose-lg">
               <h3 className="text-2xl font-bold mb-4">The Honest Rabbit</h3>
               <p className="text-gray-600 mb-4">
@@ -106,27 +106,25 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <h2 className="section-title">Who It's For</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-            <div className="card">
-              <h3 className="text-xl font-bold mb-4">Parents</h3>
-              <p className="text-gray-600">
-                Create personalized stories that teach your children important
-                values and life lessons.
-              </p>
-            </div>
-            <div className="card">
-              <h3 className="text-xl font-bold mb-4">Teachers</h3>
-              <p className="text-gray-600">
-                Generate engaging stories for your classroom that reinforce
-                educational concepts.
-              </p>
-            </div>
-            <div className="card">
-              <h3 className="text-xl font-bold mb-4">Schools</h3>
-              <p className="text-gray-600">
-                Provide a library of customized stories that align with your
-                curriculum and values.
-              </p>
-            </div>
+            {[
+              {
+                title: "Parents",
+                desc: "Create personalized stories that teach your children important values and life lessons."
+              },
+              {
+                title: "Teachers",
+                desc: "Generate engaging stories for your classroom that reinforce educational concepts."
+              },
+              {
+                title: "Schools",
+                desc: "Provide a library of customized stories that align with your curriculum and values."
+              }
+            ].map((item, index) => (
+              <div key={index} className="story-card p-6">
+                <h3 className="text-xl font-bold mb-4">{item.title}</h3>
+                <p className="text-gray-600">{item.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -137,16 +135,10 @@ export default function Home() {
           <h2 className="section-title">Topics to Explore</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
             {[
-              "Emotions",
-              "Faith",
-              "Values",
-              "Life Skills",
-              "Family",
-              "Friendship",
-              "Responsibility",
-              "Kindness",
+              "Emotions", "Faith", "Values", "Life Skills", 
+              "Family", "Friendship", "Responsibility", "Kindness"
             ].map((topic) => (
-              <div key={topic} className="card text-center">
+              <div key={topic} className="story-card text-center p-4">
                 <h3 className="text-lg font-semibold">{topic}</h3>
               </div>
             ))}
@@ -173,7 +165,7 @@ export default function Home() {
                 a: "Yes! You can customize your child's name, favorite animal, and other details to make the story more personal.",
               },
             ].map((faq, index) => (
-              <div key={index} className="card">
+              <div key={index} className="story-card p-6">
                 <h3 className="text-xl font-bold mb-2">{faq.q}</h3>
                 <p className="text-gray-600">{faq.a}</p>
               </div>
